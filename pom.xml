@@ -55,7 +55,6 @@
 			<version>42.2.20</version>
 			<scope>runtime</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
