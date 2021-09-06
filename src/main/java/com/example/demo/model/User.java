@@ -1,32 +1,19 @@
 package com.example.demo.model;
 
-import com.example.demo.entity.UserEntity;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import com.example.demo.domain.entity.UserEntity;
 
 public class User {
     private Long id;
-    private String username;
-    private List<Todo> todos;
+    private String login;
 
     public static User toModel(UserEntity entity) {
         User model = new User();
         model.setId(entity.getId());
-        model.setUsername(entity.getUsername());
-        model.setTodos(entity.getTodos().stream().map(Todo::toModel).collect(Collectors.toList()));
+        model.setLogin(entity.getLogin());
         return model;
     }
 
     public User() {
-    }
-
-    public List<Todo> getTodos() {
-        return todos;
-    }
-
-    public void setTodos(List<Todo> todos) {
-        this.todos = todos;
     }
 
     public Long getId() {
@@ -37,11 +24,11 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getLogin() {
+        return login;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 }

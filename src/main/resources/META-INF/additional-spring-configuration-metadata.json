@@ -9,5 +9,15 @@
       "name": "spring.jpa.hibernate.show-sql",
       "type": "java.lang.String",
       "description": "Description for spring.jpa.hibernate.show-sql."
+    },
+    {
+      "name": "security.oauth2.client.clientId",
+      "type": "java.lang.String",
+      "description": "Description for security.oauth2.client.clientId."
+    },
+    {
+      "name": "app.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for app.jwtSecret."
     }
   ] }

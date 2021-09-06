@@ -1,9 +1,18 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.UserEntity;
-import org.springframework.data.repository.CrudRepository;
+import com.example.demo.domain.entity.UserEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
+import java.util.Optional;
 
-    UserEntity findByUsername(String username);
+@Repository
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    Optional<UserEntity> findByLogin(String login);
+
+    Boolean existsByLogin(String login);
+
+    Boolean existsByEmail(String email);
+
+    Boolean existsByPhonenumber(String phonenumber);
 }
