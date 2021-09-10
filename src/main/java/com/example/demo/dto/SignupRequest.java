@@ -13,7 +13,6 @@ public class SignupRequest {
     private String password;
     private String email;
     private String phonenumber;
-    private boolean active;
     private String name;
     private String surname;
     private Timestamp birthday;
