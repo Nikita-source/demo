@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.security;
 
-import com.example.demo.domain.entity.UserEntity;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,15 +10,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class JwtUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
+    public JwtUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findByLogin(login)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with login: " + login));
-        return UserDetailsImpl.build(user);
+        UserEntity user = userRepository.findByLogin(login);
+        if (user == null) {
+            throw new UsernameNotFoundException("User with login: " + login + " not found");
+        }
+        JwtUserDetails jwtUser = JwtUserFactory.create(user);
+        return jwtUser;
     }
 }

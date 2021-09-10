@@ -1,4 +1,4 @@
-package com.example.demo.pojo;
+package com.example.demo.dto;
 
 public class MessageResponse {
     private String message;

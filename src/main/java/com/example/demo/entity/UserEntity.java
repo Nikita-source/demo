@@ -1,4 +1,4 @@
-package com.example.demo.domain.entity;
+package com.example.demo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +24,6 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
-    private boolean active;
-
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -42,7 +39,7 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private Timestamp birthday;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(name = "user_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})

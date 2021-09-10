@@ -1,32 +1,27 @@
-package com.example.demo.service;
+package com.example.demo.security;
 
-import com.example.demo.domain.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
-public class UserDetailsImpl implements UserDetails {
+public class JwtUserDetails implements UserDetails {
 
-    private Long id;
-    private String login;
-    private String email;
-    private boolean active;
-    private String phonenumber;
-    private String name;
-    private String surname;
-    private Timestamp birthday;
+    private final Long id;
+    private final String login;
+    private final String email;
+    private final String phonenumber;
+    private final String name;
+    private final String surname;
+    private final Timestamp birthday;
     @JsonIgnore
-    private String password;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id, String login, String password, String email, String phonenumber, String name,
-                           String surname, Timestamp birthday, Collection<? extends GrantedAuthority> authorities) {
+    public JwtUserDetails(Long id, String login, String password, String email, String phonenumber, String name,
+                          String surname, Timestamp birthday, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -38,33 +33,12 @@ public class UserDetailsImpl implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImpl build(UserEntity user) {
-        List<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-                .collect(Collectors.toList());
-
-        return new UserDetailsImpl(
-                user.getId(),
-                user.getLogin(),
-                user.getPassword(),
-                user.getEmail(),
-                user.getPhonenumber(),
-                user.getName(),
-                user.getSurname(),
-                user.getBirthday(),
-                authorities);
-    }
-
     public Long getId() {
         return id;
     }
 
     public String getEmail() {
         return email;
-    }
-
-    public boolean isActive() {
-        return active;
     }
 
     public String getPhonenumber() {
