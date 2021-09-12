@@ -22,7 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    /*@GetMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable String id) {
         try {
             UserEntity user = userService.getUserById(Long.valueOf(id));
@@ -33,9 +33,9 @@ public class UserController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }
-    }*/
+    }
 
-    @GetMapping("/{login}")
+    @GetMapping("by-login/{login}")
     public ResponseEntity<?> getUserByLogin(@PathVariable String login) {
         try {
             UserEntity user = userService.getUserByLogin(login);

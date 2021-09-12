@@ -1,11 +1,16 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.MessageResponse;
+import com.example.demo.dto.UserDto;
+import com.example.demo.entity.UserEntity;
 import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -18,10 +23,22 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @PutMapping(value = "makeadmin/{id}")
+    @PutMapping(value = "make-admin/{id}")
     public ResponseEntity<?> setAdminRole(@PathVariable(name = "id") Long id) {
         try {
             userService.makeUserAnAdmin(id);
+            return ResponseEntity.ok(new MessageResponse("New administrator CREATED"));
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @PutMapping(value = "unmake-admin/{id}")
+    public ResponseEntity<?> delAdminRole(@PathVariable(name = "id") Long id) {
+        try {
+            userService.unmakeUserAnAdmin(id);
             return ResponseEntity.ok(new MessageResponse("New administrator CREATED"));
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -37,6 +54,21 @@ public class AdminController {
             return ResponseEntity.ok("Пользователь с ID " + id + " удален");
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Произошла ошибка");
+        }
+    }
+
+    @GetMapping("all-users")
+    public ResponseEntity<?> getAllUsers() {
+        try {
+            List<UserEntity> users = userService.getAll();
+            List<UserDto> result = new ArrayList<>();
+            for (UserEntity user : users) {
+                UserDto userDto = UserDto.fromUser(user);
+                result.add(userDto);
+            }
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Произошла ошибка");
         }

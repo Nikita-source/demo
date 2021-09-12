@@ -19,4 +19,6 @@ public interface UserService {
     void deleteUser(Long id) throws UserNotFoundException;
 
     void makeUserAnAdmin(Long id) throws UserNotFoundException;
+
+    void unmakeUserAnAdmin(Long id) throws UserNotFoundException;
 }

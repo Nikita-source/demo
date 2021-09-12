@@ -1,10 +1,13 @@
 package com.example.demo.dto;
 
+import com.example.demo.entity.RoleEntity;
 import com.example.demo.entity.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -17,19 +20,7 @@ public class UserDto {
     private String name;
     private String surname;
     private Timestamp birthday;
-
-    public UserEntity toUser() {
-        UserEntity user = new UserEntity();
-        user.setId(id);
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setPhonenumber(phonenumber);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setBirthday(birthday);
-        return user;
-    }
+    private Set<String> roles;
 
     public static UserDto fromUser(UserEntity user) {
         UserDto userDto = new UserDto();
@@ -41,6 +32,11 @@ public class UserDto {
         userDto.setName(user.getName());
         userDto.setSurname(user.getSurname());
         userDto.setBirthday(user.getBirthday());
+        Set<String> tmp = new HashSet<>();
+        for (RoleEntity role : user.getRoles()) {
+            tmp.add(role.getName().toString());
+        }
+        userDto.setRoles(tmp);
         return userDto;
     }
 }

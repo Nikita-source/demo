@@ -104,5 +104,16 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void unmakeUserAnAdmin(Long id) throws UserNotFoundException {
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Пользователь с id:" + id + "  не найден"));
+
+        Set<RoleEntity> roles = new HashSet<>();
+        roles.add(roleRepository.findByName(Role.ROLE_USER));
+        user.setRoles(roles);
+        userRepository.save(user);
+    }
+
 
 }
