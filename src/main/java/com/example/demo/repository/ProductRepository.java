@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Long> {
     ProductEntity findByTitle(String title);
+
+    Boolean existsByTitle(String title);
 }

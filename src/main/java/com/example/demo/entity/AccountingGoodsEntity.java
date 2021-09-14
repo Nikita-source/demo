@@ -23,10 +23,6 @@ public class AccountingGoodsEntity {
     @JoinColumn(name="id")
     private Set<ShopEntity> shops;
 
-    @OneToMany
-    @JoinColumn(name="id")
-    private Set<WarehouseEntity> warehouses;
-
     @Column
     private Long totalcount;
 }
