@@ -19,7 +19,7 @@ public class ShopEntity {
     private String title;
 
     @OneToMany(mappedBy = "shop")
-    private Set<ShopInventoryEntity> inventory;
+    private Set<ShopInventoryEntity> inventories;
 
     @OneToMany(mappedBy = "shop")
     private Set<SupplyEntity> supplies;
