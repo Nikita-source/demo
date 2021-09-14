@@ -31,7 +31,7 @@ public class AdminController {
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
+            return ResponseEntity.badRequest().body("An error has occurred");
         }
     }
 
@@ -43,7 +43,7 @@ public class AdminController {
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
+            return ResponseEntity.badRequest().body("An error has occurred");
         }
     }
 
@@ -51,11 +51,11 @@ public class AdminController {
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
             userService.deleteUser(Long.valueOf(id));
-            return ResponseEntity.ok("Пользователь с ID " + id + " удален");
+            return ResponseEntity.ok("User with ID "+ id +" deleted");
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ошибка");
+            return ResponseEntity.badRequest().body("An error has occurred");
         }
     }
 

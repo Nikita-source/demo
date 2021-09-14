@@ -34,10 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity registration(SignupRequest signupRequest) throws UserAlreadyExistException {
         if (userRepository.existsByLogin(signupRequest.getLogin())) {
-            throw new UserAlreadyExistException("Пользователь с таким именем уже существует");
+            throw new UserAlreadyExistException("User with this Login already exists");
         }
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new UserAlreadyExistException("Пользователь с таким Email уже существует");
+            throw new UserAlreadyExistException("User with this Email already exists");
+        }
+        if (userRepository.existsByPhonenumber(signupRequest.getPhonenumber())) {
+            throw new UserAlreadyExistException("User with this Phone Number already exists");
         }
 
         UserEntity user = new UserEntity(signupRequest.getLogin(), passwordEncoder.encode(signupRequest.getPassword()),
@@ -65,22 +68,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserEntity> getAll() {
-        List<UserEntity> result = userRepository.findAll();
-        return result;
+        return userRepository.findAll();
     }
 
     @Override
     public UserEntity getUserById(Long id) throws UserNotFoundException {
-        UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь с id:" + id + "  не найден"));
-        return user;
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
     }
 
     @Override
     public UserEntity getUserByLogin(String login) throws UserNotFoundException {
         UserEntity user = userRepository.findByLogin(login);
         if (user == null) {
-            throw new UserNotFoundException("Пользователь с логном:" + login + "  не найден");
+            throw new UserNotFoundException("User with LOGIN:" + login + "not found");
         }
         return user;
     }
@@ -88,14 +89,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) throws UserNotFoundException {
         userRepository.findById(id).
-                orElseThrow(() -> new UserNotFoundException("Пользователь с id:" + id + "  не найден"));
+                orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
         userRepository.deleteById(id);
     }
 
     @Override
     public void makeUserAnAdmin(Long id) throws UserNotFoundException {
         UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь с id:" + id + "  не найден"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
 
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleRepository.findByName(Role.ROLE_ADMIN));
@@ -107,7 +108,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void unmakeUserAnAdmin(Long id) throws UserNotFoundException {
         UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Пользователь с id:" + id + "  не найден"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
 
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleRepository.findByName(Role.ROLE_USER));

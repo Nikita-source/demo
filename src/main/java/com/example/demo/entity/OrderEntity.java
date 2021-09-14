@@ -18,7 +18,7 @@ public class OrderEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
 }

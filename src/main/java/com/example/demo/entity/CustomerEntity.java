@@ -16,7 +16,7 @@ public class CustomerEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NaturalId
+    @NaturalId(mutable = true)
     @Column(nullable = false, unique = true)
     private String email;
 
