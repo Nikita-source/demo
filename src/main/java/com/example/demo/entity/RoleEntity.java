@@ -23,8 +23,4 @@ public class RoleEntity {
     private Set<UserEntity> users;
 
     public RoleEntity() {}
-
-    public RoleEntity(Role name) {
-        this.name = name;
-    }
 }
