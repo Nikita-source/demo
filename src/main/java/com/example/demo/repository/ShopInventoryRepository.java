@@ -18,5 +18,7 @@ public interface ShopInventoryRepository extends JpaRepository<ShopInventoryEnti
 
     List<ShopInventoryEntity> findAllByShop_Title(String shop_title);
 
+    ShopInventoryEntity findByProduct_TitleAndShop_Title(String product_title, String shop_title);
+
     Boolean existsByShopAndProduct(ShopEntity shop, ProductEntity product);
 }

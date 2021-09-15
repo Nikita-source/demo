@@ -72,4 +72,8 @@ public class ProductServiceImpl implements ProductService {
                 orElseThrow(() -> new ProductNotFoundException("Product with this ID not found"));
         productRepository.deleteById(id);
     }
+
+    public void refreshProducts() {
+
+    }
 }

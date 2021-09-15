@@ -16,5 +16,7 @@ public interface WarehouseInventoryRepository extends JpaRepository<WarehouseInv
 
     List<WarehouseInventoryEntity> findAllByWarehouse_Id(Long warehouse_id);
 
+    WarehouseInventoryEntity findByProduct_TitleAndWarehouse_Id(String product_title, Long warehouse_id);
+
     Boolean existsByWarehouseAndProduct(WarehouseEntity warehouse, ProductEntity product);
 }

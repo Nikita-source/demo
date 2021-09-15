@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.MessageResponse;
+import com.example.demo.dto.SupplyDto;
 import com.example.demo.entity.SupplyEntity;
 import com.example.demo.exception.SupplyException;
 import com.example.demo.service.impl.SupplyServiceImpl;
@@ -22,10 +23,10 @@ public class SupplyController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addSupply(@RequestBody SupplyEntity supply) {
+    public ResponseEntity<?> addSupply(@RequestBody SupplyDto supplyDto) {
         try {
-            supplyService.addNewSupply(supply);
-            return ResponseEntity.ok(new MessageResponse("Product CREATED"));
+            supplyService.addNewSupply(supplyDto);
+            return ResponseEntity.ok(new MessageResponse("Supply CREATED"));
         } catch (SupplyException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
@@ -37,13 +38,12 @@ public class SupplyController {
     public ResponseEntity<?> getAllSupplies() {
         try {
             List<SupplyEntity> supplies = supplyService.getAll();
-            /*List<ProductDto> result = new ArrayList<>();
-            for (ProductEntity product: products) {
-                ProductDto productDto = ProductDto.fromProduct(product);
+            List<SupplyDto> result = new ArrayList<>();
+            for (SupplyEntity supply: supplies) {
+                SupplyDto productDto = SupplyDto.fromSupply(supply);
                 result.add(productDto);
             }
-            return ResponseEntity.ok(result);*/
-            return ResponseEntity.ok(supplies);
+            return ResponseEntity.ok(result);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("An error has occurred");
         }
