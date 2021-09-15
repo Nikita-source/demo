@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.CustomerDto;
 import com.example.demo.dto.MessageResponse;
 import com.example.demo.dto.OrderDto;
-import com.example.demo.entity.CustomerEntity;
 import com.example.demo.entity.OrderEntity;
 import com.example.demo.exception.CustomerNotFoundException;
+import com.example.demo.exception.OrderException;
 import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,9 @@ public class OrderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (ProductNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (Exception e) {
+        } catch (OrderException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }catch (Exception e) {
             return ResponseEntity.badRequest().body("An error has occurred");
         }
     }

@@ -1,9 +1,11 @@
 package com.example.demo.service.impl;
 
 import com.example.demo.entity.ProductEntity;
+import com.example.demo.entity.ShopInventoryEntity;
 import com.example.demo.exception.ProductAlreadyExistException;
 import com.example.demo.exception.ProductNotFoundException;
 import com.example.demo.repository.ProductRepository;
+import com.example.demo.repository.ShopInventoryRepository;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,10 +16,12 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ShopInventoryRepository shopInventoryRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ShopInventoryRepository shopInventoryRepository) {
         this.productRepository = productRepository;
+        this.shopInventoryRepository = shopInventoryRepository;
     }
 
     @Override
@@ -74,6 +78,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void refreshProducts() {
-
+        List<ProductEntity> products = productRepository.findAll();
+        for (ProductEntity product : products) {
+            List<ShopInventoryEntity> shopInventories = shopInventoryRepository.findAllByProduct_Title(product.getTitle());
+            for (ShopInventoryEntity shopInventory : shopInventories) {
+                if (shopInventory.getCount() > 0) {
+                    product.setAvailability(true);
+                    break;
+                }
+                product.setAvailability(false);
+            }
+            productRepository.save(product);
+        }
     }
 }
