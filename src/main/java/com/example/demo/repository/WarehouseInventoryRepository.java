@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.ShopInventoryEntity;
+import com.example.demo.entity.ProductEntity;
+import com.example.demo.entity.WarehouseEntity;
 import com.example.demo.entity.WarehouseInventoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,5 +14,7 @@ public interface WarehouseInventoryRepository extends JpaRepository<WarehouseInv
 
     List<WarehouseInventoryEntity> findAllByProduct_Title(String product_title);
 
-    List<WarehouseInventoryEntity> findByWarehouse_Id(Long warehouse_id);
+    List<WarehouseInventoryEntity> findAllByWarehouse_Id(Long warehouse_id);
+
+    Boolean existsByWarehouseAndProduct(WarehouseEntity warehouse, ProductEntity product);
 }

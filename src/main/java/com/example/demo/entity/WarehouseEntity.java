@@ -21,7 +21,7 @@ public class WarehouseEntity {
     @OneToMany(mappedBy = "warehouse")
     private Set<SupplyEntity> supplies;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 }

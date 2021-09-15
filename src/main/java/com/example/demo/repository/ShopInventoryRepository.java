@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import com.example.demo.entity.ProductEntity;
+import com.example.demo.entity.ShopEntity;
 import com.example.demo.entity.ShopInventoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +17,6 @@ public interface ShopInventoryRepository extends JpaRepository<ShopInventoryEnti
     List<ShopInventoryEntity> findAllByShop_Id(Long shop_id);
 
     List<ShopInventoryEntity> findAllByShop_Title(String shop_title);
+
+    Boolean existsByShopAndProduct(ShopEntity shop, ProductEntity product);
 }

@@ -18,6 +18,6 @@ public class ProductCategoryEntity {
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
     private Set<ProductEntity> products;
 }
