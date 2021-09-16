@@ -2,11 +2,17 @@ package com.example.demo.dto;
 
 import com.example.demo.entity.SupplyEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SupplyDto {
     private Long id;
@@ -15,13 +21,6 @@ public class SupplyDto {
     private String productTitle;
     private Long count;
     private Timestamp date;
-
-    public static SupplyEntity toSupply(SupplyDto supplyDto) {
-        SupplyEntity supply = new SupplyEntity();
-        supply.setId(supplyDto.getId());
-
-        return supply;
-    }
 
     public static SupplyDto fromSupply(SupplyEntity supply) {
         SupplyDto supplyDto = new SupplyDto();

@@ -107,7 +107,7 @@ public class CustomerController {
     public ResponseEntity<?> deleteCustomer(@PathVariable String id) {
         try {
             customerService.deleteCustomer(Long.valueOf(id));
-            return ResponseEntity.ok("Customer with ID "+ id +" deleted");
+            return ResponseEntity.ok("Customer with ID " + id + " deleted");
         } catch (CustomerNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {

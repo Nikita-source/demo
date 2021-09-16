@@ -13,5 +13,5 @@ public interface OrderService {
 
     List<OrderEntity> getAllOrdersByCustomer(String email);
 
-    void deleteOrder(Long id) throws CustomerNotFoundException;
+    void deleteOrder(Long id) throws OrderException;
 }

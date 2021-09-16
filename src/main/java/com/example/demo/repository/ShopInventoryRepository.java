@@ -10,13 +10,11 @@ import java.util.List;
 
 @Repository
 public interface ShopInventoryRepository extends JpaRepository<ShopInventoryEntity, Long> {
-    List<ShopInventoryEntity> findAllByProduct_Id(Long product_id);
 
     List<ShopInventoryEntity> findAllByProduct_Title(String product_title);
 
     List<ShopInventoryEntity> findAllByShop_Id(Long shop_id);
 
-    List<ShopInventoryEntity> findAllByShop_Title(String shop_title);
 
     ShopInventoryEntity findByProduct_TitleAndShop_Title(String product_title, String shop_title);
 

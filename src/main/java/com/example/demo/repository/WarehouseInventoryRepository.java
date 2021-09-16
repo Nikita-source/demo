@@ -10,9 +10,6 @@ import java.util.List;
 
 @Repository
 public interface WarehouseInventoryRepository extends JpaRepository<WarehouseInventoryEntity, Long> {
-    List<WarehouseInventoryEntity> findAllByProduct_Id(Long product_id);
-
-    List<WarehouseInventoryEntity> findAllByProduct_Title(String product_title);
 
     List<WarehouseInventoryEntity> findAllByWarehouse_Id(Long warehouse_id);
 

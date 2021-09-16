@@ -22,5 +22,6 @@ public class RoleEntity {
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<UserEntity> users;
 
-    public RoleEntity() {}
+    public RoleEntity() {
+    }
 }

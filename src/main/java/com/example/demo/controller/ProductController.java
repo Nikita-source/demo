@@ -54,7 +54,7 @@ public class ProductController {
         try {
             List<ProductEntity> products = productService.getAll();
             List<ProductDto> result = new ArrayList<>();
-            for (ProductEntity product: products) {
+            for (ProductEntity product : products) {
                 ProductDto productDto = ProductDto.fromProduct(product);
                 result.add(productDto);
             }

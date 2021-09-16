@@ -17,4 +17,28 @@ public class SignupRequest {
     private String surname;
     private Timestamp birthday;
     private Set<String> roles;
+
+    public SignupRequest() {
+    }
+
+    public SignupRequest(String login, String password, String email, String phonenumber, String name, String surname, Timestamp birthday, Set<String> roles) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.roles = roles;
+    }
+
+    public SignupRequest(String login, String password, String email, String phonenumber, String name, String surname, Timestamp birthday) {
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.phonenumber = phonenumber;
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+    }
 }

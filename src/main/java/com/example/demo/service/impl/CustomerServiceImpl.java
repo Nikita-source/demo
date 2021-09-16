@@ -42,14 +42,10 @@ public class CustomerServiceImpl implements CustomerService {
         if (!customerDto.getEmail().equals(customer.getEmail()) && customerRepository.existsByEmail(customerDto.getEmail())) {
             throw new CustomerAlreadyExistException("Customer with this Email already exists");
         }
-        if (!customerDto.getPhonenumber().equals(customer.getPhonenumber()) &&customerRepository.existsByPhonenumber(customerDto.getPhonenumber())) {
+        if (!customerDto.getPhonenumber().equals(customer.getPhonenumber()) && customerRepository.existsByPhonenumber(customerDto.getPhonenumber())) {
             throw new CustomerAlreadyExistException("Customer with this Phone Number already exists");
         }
-        customer.setEmail(customerDto.getEmail());
-        customer.setPhonenumber(customerDto.getPhonenumber());
-        customer.setName(customerDto.getName());
-        customer.setSecondname(customerDto.getSecondname());
-        customer.setLastname(customerDto.getLastname());
+        customer = CustomerDto.toCustomer(customerDto);
         customerRepository.save(customer);
     }
 

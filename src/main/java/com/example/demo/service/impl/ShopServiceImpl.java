@@ -52,7 +52,7 @@ public class ShopServiceImpl implements ShopService {
         if (shopEntity == null) {
             throw new ShopNotFoundException("Shop with this Title not found");
         }
-        if (!shopEntity.getTitle().equals(shopDto.getShopTitle()) && shopRepository.findByTitle(shopDto.getShopTitle()) != null) {
+        if (!shopDto.getShopTitle().equals(shopEntity.getTitle()) && shopRepository.existsByTitle(shopDto.getShopTitle())) {
             throw new ShopAlreadyExistException("Shop with this Title already exists");
         }
         shopEntity.setTitle(shopDto.getShopTitle());

@@ -39,7 +39,7 @@ public class SupplyController {
         try {
             List<SupplyEntity> supplies = supplyService.getAll();
             List<SupplyDto> result = new ArrayList<>();
-            for (SupplyEntity supply: supplies) {
+            for (SupplyEntity supply : supplies) {
                 SupplyDto productDto = SupplyDto.fromSupply(supply);
                 result.add(productDto);
             }

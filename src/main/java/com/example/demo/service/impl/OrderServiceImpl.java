@@ -81,13 +81,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderEntity> getAllOrdersByCustomer(String email) {
-        return orderRepository.findAll();
+        return orderRepository.findAllByCustomer_Email(email);
     }
 
     @Override
-    public void deleteOrder(Long id) throws CustomerNotFoundException {
+    public void deleteOrder(Long id) throws OrderException {
         orderRepository.findById(id).
-                orElseThrow(() -> new CustomerNotFoundException("Order with this ID not found"));
+                orElseThrow(() -> new OrderException("Order with this ID not found"));
         orderRepository.deleteById(id);
     }
 }

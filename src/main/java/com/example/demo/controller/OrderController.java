@@ -35,7 +35,7 @@ public class OrderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (OrderException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
-        }catch (Exception e) {
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body("An error has occurred");
         }
     }
@@ -60,7 +60,7 @@ public class OrderController {
         try {
             orderService.deleteOrder(Long.valueOf(id));
             return ResponseEntity.ok("Order with ID " + id + " deleted");
-        } catch (CustomerNotFoundException e) {
+        } catch (OrderException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("An error has occurred");

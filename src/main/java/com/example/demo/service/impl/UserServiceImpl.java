@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
             roles.add(roleRepository.findByName(Role.ROLE_USER));
         } else {
             reqRoles.forEach(r -> {
-                if ("admin".equals(r)) {
+                if ("ROLE_ADMIN".equals(r)) {
                     roles.add(roleRepository.findByName(Role.ROLE_ADMIN));
                 } else {
                     roles.add(roleRepository.findByName(Role.ROLE_USER));
@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity getUserById(Long id) throws UserNotFoundException {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found"));
     }
 
     @Override
@@ -89,14 +89,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) throws UserNotFoundException {
         userRepository.findById(id).
-                orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
+                orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found"));
         userRepository.deleteById(id);
     }
 
     @Override
     public void makeUserAnAdmin(Long id) throws UserNotFoundException {
         UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found"));
 
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleRepository.findByName(Role.ROLE_ADMIN));
@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void unmakeUserAnAdmin(Long id) throws UserNotFoundException {
         UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id: "+ id +" not found"));
+                .orElseThrow(() -> new UserNotFoundException("User with id: " + id + " not found"));
 
         Set<RoleEntity> roles = new HashSet<>();
         roles.add(roleRepository.findByName(Role.ROLE_USER));

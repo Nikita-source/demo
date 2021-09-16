@@ -3,9 +3,15 @@ package com.example.demo.dto;
 import com.example.demo.entity.AddressEntity;
 import com.example.demo.entity.ShopEntity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ShopDto {
     private Long id;

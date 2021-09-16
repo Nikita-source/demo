@@ -51,7 +51,7 @@ public class AdminController {
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
             userService.deleteUser(Long.valueOf(id));
-            return ResponseEntity.ok("User with ID "+ id +" deleted");
+            return ResponseEntity.ok("User with ID " + id + " deleted");
         } catch (UserNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
